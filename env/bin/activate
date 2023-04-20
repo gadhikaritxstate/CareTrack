@@ -69,11 +69,11 @@ if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
 fi
 
 export SECRET_KEY='django-insecure-&(afqn3z2!j!%sznl%@=*c#qczcrbvo_bz@s5^5ihyz-_2^)s%'
-export DATABASE_HOST='ec2-3-217-146-37.compute-1.amazonaws.com'
-export DATABASE_NAME='d1ao2q6t2ahe78'
-export DATABASE_USER='zimjnicpewtlck'
+export DATABASE_HOST='ec2-44-215-22-37.compute-1.amazonaws.com'
+export DATABASE_NAME='d4jt8nbvrlkc97'
+export DATABASE_USER='iuqsrtghavshnt'
 export DATABASE_PORT=5432
-export DATABASE_PASSWORD='0821b4c077cd309c46eebc1f7d8040fb6708123f45cffc9ea0e9ff70ec635006'
+export DATABASE_PASSWORD='546d26f84f0f5d9914ca1dce5b35537d4a6635b117e9f8c5b6415f51ff234338'
 
 
 
