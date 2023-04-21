@@ -66,7 +66,7 @@ class Clinic(models.Model):
 
 
     clinic_name =  models.CharField(
-        db_column="FIRST_NAME", max_length=300, null=False, blank=False
+        db_column="CLINIC_NAME", max_length=300, null=False, blank=False
     )
 
     street = models.CharField(
@@ -89,7 +89,7 @@ class Clinic(models.Model):
 
     @property
     def full_name(self):
-        return f"{self.first_name} {self.middle_name} {self.last_name}"
+        return f"{self.clinic_name}"
     
     @property
     def full_address(self):
