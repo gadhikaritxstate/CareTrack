@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.views import exception_handler
-
+from caretrack.configurations.exceptions.caretrack_core_exception import CareTrackError 
 from caretrack.configurations.utilities.http_codes import BAD_REQUEST
 from ..utilities.api_response import CareTrackResponse
 
