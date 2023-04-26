@@ -4,7 +4,7 @@ from caretrack.configurations.utilities.api_response import CareTrackResponse
 from caretrack.configurations.exceptions.caretrack_core_exception import CareTrackError
 from rest_framework import viewsets
 from .models import Patient,Appointments,Clinic, Doctor
-from .serializers import PatientSerializer
+from .serializers import PatientSerializer, DoctorSerializer, ClinicSerializer
 from caretrack.configurations.utilities.global_constants import (
     SUCCESSFULLY_CREATED,
     SUCCESSFULLY_DELETED,
@@ -38,7 +38,7 @@ class PatientView(viewsets.ModelViewSet):
 
     def list(self, request):
 
-        result = Patient.objects.all()
+        result = Patient.objects.filter(is_archived=False)
         serializer = PatientSerializer(
             result, context={"request": request}, many=True
         )
@@ -47,7 +47,7 @@ class PatientView(viewsets.ModelViewSet):
     def retrieve(self, request, pk):
 
         try:
-            result = Patient.objects.get(id=pk)
+            result = Patient.objects.get(id=pk, is_archived=False)
         except Patient.DoesNotExist:
             raise CareTrackResponse(
                 http_status=BAD_REQUEST,
@@ -78,7 +78,7 @@ class PatientView(viewsets.ModelViewSet):
 
     def update(self, request, pk):
         try:
-            instance = Patient.objects.get(id=pk)
+            instance = Patient.objects.get(id=pk,is_archived=False)
         except Patient.DoesNotExist:
             raise CareTrackError(
                 http_status=BAD_REQUEST, message="No Matching Record found"
@@ -100,8 +100,9 @@ class PatientView(viewsets.ModelViewSet):
     def destroy(self, request, pk):
 
         try:
-            instance = Patient.objects.get(id=pk)
-            instance.delete()
+            instance = Patient.objects.get(id=pk,is_archived=False)
+            instance.is_archived=True
+            instance.save()
         except Patient.DoesNotExist:
             raise CareTrackError(
                 http_status=BAD_REQUEST, message="No Matching Record found"
@@ -110,3 +111,170 @@ class PatientView(viewsets.ModelViewSet):
             http_status=OK,
             message=SUCCESSFULLY_DELETED,
         ).build_response()
+
+
+
+class DoctorView(viewsets.ModelViewSet):
+
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
+    renderer_classes = [JSONRenderer]
+
+    def list(self, request):
+
+        result = Doctor.objects.filter(is_archived=False)
+        serializer = DoctorSerializer(
+            result, context={"request": request}, many=True
+        )
+        return CareTrackResponse(data=serializer.data).build_response()
+
+    def retrieve(self, request, pk):
+
+        try:
+            result = Doctor.objects.get(id=pk, is_archived=False)
+        except Doctor.DoesNotExist:
+            raise CareTrackResponse(
+                http_status=BAD_REQUEST,
+                message="No Matching Record found",
+            )
+
+        serializer = DoctorSerializer(result, context={"request": request})
+        return CareTrackResponse(data=serializer.data).build_response()
+
+    def create(self, request):
+
+        user_email = request.data.get("email")
+        if Doctor.objects.filter(email=user_email).exists():
+            raise CareTrackError(http_status=BAD_REQUEST, message="User already exists")
+
+        serializer = DoctorSerializer(
+            data=request.data, context={"request": request}
+        )
+        serializer.is_valid(raise_exception=True)
+        instance = serializer.save()
+
+        return CareTrackResponse(
+            data=serializer.data,
+            http_status=CREATED,
+            message=SUCCESSFULLY_CREATED,
+        ).build_response()
+
+
+    def update(self, request, pk):
+        try:
+            instance = Doctor.objects.get(id=pk,is_archived=False)
+        except Doctor.DoesNotExist:
+            raise CareTrackError(
+                http_status=BAD_REQUEST, message="No Matching Record found"
+            )
+        serializer = DoctorSerializer(
+            instance=instance,
+            data=request.data,
+            context={"request": request},
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return CareTrackResponse(
+            data=serializer.data,
+            http_status=UPDATED,
+            message=SUCCESSFULLY_UPDATED,
+        ).build_response()
+
+    def destroy(self, request, pk):
+
+        try:
+            instance = Doctor.objects.get(id=pk, is_archived=False)
+            instance.is_archived = True
+        except Doctor.DoesNotExist:
+            raise CareTrackError(
+                http_status=BAD_REQUEST, message="No Matching Record found"
+            )
+        return CareTrackResponse(
+            http_status=OK,
+            message=SUCCESSFULLY_DELETED,
+        ).build_response()
+
+
+
+class ClinicView(viewsets.ModelViewSet):
+
+    queryset = Clinic.objects.all()
+    serializer_class = ClinicSerializer
+    renderer_classes = [JSONRenderer]
+
+    def list(self, request):
+
+        result = Clinic.objects.all()
+        serializer = ClinicSerializer(
+            result, context={"request": request}, many=True
+        )
+        return CareTrackResponse(data=serializer.data).build_response()
+
+    def retrieve(self, request, pk):
+
+        try:
+            result = Clinic.objects.get(id=pk, is_archived=False)
+        except Clinic.DoesNotExist:
+            raise CareTrackError(
+                http_status=BAD_REQUEST,
+                message="No Matching Record found",
+            )
+
+        serializer = ClinicSerializer(result, context={"request": request})
+        return CareTrackResponse(data=serializer.data).build_response()
+
+    def create(self, request):
+
+        serializer = ClinicSerializer(
+            data=request.data, context={"request": request}
+        )
+        serializer.is_valid(raise_exception=True)
+        instance = serializer.save()
+
+        return CareTrackResponse(
+            data=serializer.data,
+            http_status=CREATED,
+            message=SUCCESSFULLY_CREATED,
+        ).build_response()
+
+
+    def update(self, request, pk):
+        try:
+            instance = Clinic.objects.get(id=pk,is_archived=False)
+        except Clinic.DoesNotExist:
+            raise CareTrackError(
+                http_status=BAD_REQUEST, message="No Matching Record found"
+            )
+        serializer = ClinicSerializer(
+            instance=instance,
+            data=request.data,
+            context={"request": request},
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return CareTrackResponse(
+            data=serializer.data,
+            http_status=UPDATED,
+            message=SUCCESSFULLY_UPDATED,
+        ).build_response()
+
+    def destroy(self, request, pk):
+
+        try:
+            instance = Clinic.objects.get(id=pk, is_archived=False)
+            instance.archived=True
+            instance.save
+            
+        except Clinic.DoesNotExist:
+            raise CareTrackError(
+                http_status=BAD_REQUEST, message="No Matching Record found"
+            )
+        return CareTrackResponse(
+            http_status=OK,
+            message=SUCCESSFULLY_DELETED,
+        ).build_response()
+
+
+
