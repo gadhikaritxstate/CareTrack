@@ -38,7 +38,7 @@ class PatientView(viewsets.ModelViewSet):
 
     def list(self, request):
 
-        result = Patient.objects.filter(is_archived=False)
+        result = Patient.objects.filter(archived=False)
         serializer = PatientSerializer(
             result, context={"request": request}, many=True
         )
@@ -47,7 +47,7 @@ class PatientView(viewsets.ModelViewSet):
     def retrieve(self, request, pk):
 
         try:
-            result = Patient.objects.get(id=pk, is_archived=False)
+            result = Patient.objects.get(id=pk, archived=False)
         except Patient.DoesNotExist:
             raise CareTrackResponse(
                 http_status=BAD_REQUEST,
@@ -78,7 +78,7 @@ class PatientView(viewsets.ModelViewSet):
 
     def update(self, request, pk):
         try:
-            instance = Patient.objects.get(id=pk,is_archived=False)
+            instance = Patient.objects.get(id=pk,archived=False)
         except Patient.DoesNotExist:
             raise CareTrackError(
                 http_status=BAD_REQUEST, message="No Matching Record found"
@@ -100,8 +100,8 @@ class PatientView(viewsets.ModelViewSet):
     def destroy(self, request, pk):
 
         try:
-            instance = Patient.objects.get(id=pk,is_archived=False)
-            instance.is_archived=True
+            instance = Patient.objects.get(id=pk,archived=False)
+            instance.archived=True
             instance.save()
         except Patient.DoesNotExist:
             raise CareTrackError(
@@ -122,7 +122,7 @@ class DoctorView(viewsets.ModelViewSet):
 
     def list(self, request):
 
-        result = Doctor.objects.filter(is_archived=False)
+        result = Doctor.objects.filter(archived=False)
         serializer = DoctorSerializer(
             result, context={"request": request}, many=True
         )
@@ -131,7 +131,7 @@ class DoctorView(viewsets.ModelViewSet):
     def retrieve(self, request, pk):
 
         try:
-            result = Doctor.objects.get(id=pk, is_archived=False)
+            result = Doctor.objects.get(id=pk, archived=False)
         except Doctor.DoesNotExist:
             raise CareTrackResponse(
                 http_status=BAD_REQUEST,
@@ -162,7 +162,7 @@ class DoctorView(viewsets.ModelViewSet):
 
     def update(self, request, pk):
         try:
-            instance = Doctor.objects.get(id=pk,is_archived=False)
+            instance = Doctor.objects.get(id=pk,archived=False)
         except Doctor.DoesNotExist:
             raise CareTrackError(
                 http_status=BAD_REQUEST, message="No Matching Record found"
@@ -184,8 +184,8 @@ class DoctorView(viewsets.ModelViewSet):
     def destroy(self, request, pk):
 
         try:
-            instance = Doctor.objects.get(id=pk, is_archived=False)
-            instance.is_archived = True
+            instance = Doctor.objects.get(id=pk, archived=False)
+            instance.archived = True
         except Doctor.DoesNotExist:
             raise CareTrackError(
                 http_status=BAD_REQUEST, message="No Matching Record found"
@@ -214,7 +214,7 @@ class ClinicView(viewsets.ModelViewSet):
     def retrieve(self, request, pk):
 
         try:
-            result = Clinic.objects.get(id=pk, is_archived=False)
+            result = Clinic.objects.get(id=pk, archived=False)
         except Clinic.DoesNotExist:
             raise CareTrackError(
                 http_status=BAD_REQUEST,
@@ -241,7 +241,7 @@ class ClinicView(viewsets.ModelViewSet):
 
     def update(self, request, pk):
         try:
-            instance = Clinic.objects.get(id=pk,is_archived=False)
+            instance = Clinic.objects.get(id=pk,archived=False)
         except Clinic.DoesNotExist:
             raise CareTrackError(
                 http_status=BAD_REQUEST, message="No Matching Record found"
@@ -263,9 +263,9 @@ class ClinicView(viewsets.ModelViewSet):
     def destroy(self, request, pk):
 
         try:
-            instance = Clinic.objects.get(id=pk, is_archived=False)
+            instance = Clinic.objects.get(id=pk, archived=False)
             instance.archived=True
-            instance.save
+            instance.save()
             
         except Clinic.DoesNotExist:
             raise CareTrackError(
