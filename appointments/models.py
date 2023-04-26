@@ -179,13 +179,14 @@ class Clinic(models.Model):
 
     phone = models.CharField(db_column="PHONE", null=False, blank=False, max_length=20)
 
-    doctor = models.ManyToManyField(
+
+    doctor_clinic = models.ManyToManyField(
         Doctor,
         db_column="DOCTOR_ID",
         related_name="mm_doctor_id",
         blank=True,
-        through="DoctorClinics",
     )
+
     
     archived = models.BooleanField(db_column="ARCHIVED", default=False)
 

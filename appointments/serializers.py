@@ -39,6 +39,15 @@ class DoctorSerializer(serializers.ModelSerializer):
 
 
 
+class ClinicGetSerializer(serializers.ModelSerializer):
+    doctor_clinic = DoctorSerializer(many=True)
+    class Meta:
+        model = Clinic
+        fields = "__all__"
+    
+
+
+
 class ClinicSerializer(serializers.ModelSerializer):
     # doctor = serializers.ReadOnlyField(source='author.name')
     doctor = serializers.ListField(write_only=True)
@@ -63,6 +72,6 @@ class ClinicSerializer(serializers.ModelSerializer):
 
         doctor_data = validated_data.pop('doctor')
         clinic = Clinic.objects.create(**validated_data)
-        clinic.doctor.set(doctor_data)
+        clinic.doctor_clinic.set(doctor_data)
         return clinic
     

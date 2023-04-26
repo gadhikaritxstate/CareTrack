@@ -4,7 +4,7 @@ from caretrack.configurations.utilities.api_response import CareTrackResponse
 from caretrack.configurations.exceptions.caretrack_core_exception import CareTrackError
 from rest_framework import viewsets
 from .models import Patient,Appointments,Clinic, Doctor
-from .serializers import PatientSerializer, DoctorSerializer, ClinicSerializer
+from .serializers import PatientSerializer, DoctorSerializer, ClinicSerializer, ClinicGetSerializer
 from caretrack.configurations.utilities.global_constants import (
     SUCCESSFULLY_CREATED,
     SUCCESSFULLY_DELETED,
@@ -206,7 +206,7 @@ class ClinicView(viewsets.ModelViewSet):
     def list(self, request):
 
         result = Clinic.objects.all()
-        serializer = ClinicSerializer(
+        serializer = ClinicGetSerializer(
             result, context={"request": request}, many=True
         )
         return CareTrackResponse(data=serializer.data).build_response()
@@ -221,7 +221,7 @@ class ClinicView(viewsets.ModelViewSet):
                 message="No Matching Record found",
             )
 
-        serializer = ClinicSerializer(result, context={"request": request})
+        serializer = ClinicGetSerializer(result, context={"request": request})
         return CareTrackResponse(data=serializer.data).build_response()
 
     def create(self, request):
