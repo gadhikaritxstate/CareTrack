@@ -144,7 +144,7 @@ class DoctorView(viewsets.ModelViewSet):
 
         serializer = DoctorSerializer(data=request.data, context={"request": request})
         serializer.is_valid(raise_exception=True)
-        instance = serializer.save()
+        serializer.save()
 
         return CareTrackResponse(
             data=serializer.data,
@@ -284,6 +284,13 @@ class AppointmentsView(viewsets.ModelViewSet):
         return CareTrackResponse(data=serializer.data).build_response()
 
     def create(self, request):
+        if not request.data.get("patient") or request.data.get("patient") is None:
+            raise CareTrackError(http_status=BAD_REQUEST, message="Patient is required")
+        elif not request.data.get("doctor") or request.data.get("patient") is None:
+            raise CareTrackError(http_status=BAD_REQUEST, message="Doctor is required")
+        elif not request.data.get("clinic") or request.data.get("patient") is None:
+            raise CareTrackError(http_status=BAD_REQUEST, message="Clinic is required")
+
         serializer = AppointmentsSerializer(
             data=request.data, context={"request": request}
         )
