@@ -71,6 +71,56 @@ class Patient(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 
+class Clinic(models.Model):
+    class Meta:
+        db_table = "CLINIC"
+
+    id = models.BigAutoField(db_column="ID", primary_key=True)
+
+    created_date = models.DateTimeField(db_column="CREATED_DATE", auto_now_add=True)
+
+    modified_date = models.DateTimeField(db_column="MODIFIED_DATE", auto_now=True)
+
+    clinic_name = models.CharField(
+        db_column="CLINIC_NAME", max_length=300, null=False, blank=False
+    )
+
+    street = models.CharField(
+        db_column="STREET", null=False, blank=False, max_length=300
+    )
+
+    city = models.CharField(db_column="CITY", null=False, blank=False, max_length=300)
+
+    state = models.CharField(db_column="STATE", null=False, blank=False, max_length=300)
+
+    # doctors = models.ManyToManyField(
+    #     Doctor,
+    #     db_column="DOCTOR_ID",
+    #     related_name="mm_doctor_id",
+    #     blank=True,
+    #     through="DoctorClinics",
+    # )
+    
+    zipcode = models.CharField(
+        db_column="ZIPCODE", null=False, blank=False, max_length=7
+    )
+
+    phone = models.CharField(db_column="PHONE", null=False, blank=False, max_length=20)
+
+    archived = models.BooleanField(db_column="ARCHIVED", default=False)
+
+    @property
+    def get_clinic_name(self):
+        return f"{self.clinic_name}"
+
+    @property
+    def full_address(self):
+        return f"{self.street} {self.city} {self.state} {self.zipcode}"
+
+    def __str__(self):
+        return f"{self.clinic_name}"
+
+
 class Doctor(models.Model):
     class Meta:
         db_table = "DOCTOR"
@@ -132,6 +182,18 @@ class Doctor(models.Model):
         unique=False,
     )
 
+    clinic = models.ForeignKey(
+        Clinic,
+        db_column="CLINIC_ID",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="doctor_clinic_id",
+    )
+
+
+
+
     # # clinic_FK
     # clinic = models.ManyToManyField(
     #     Clinic,
@@ -149,57 +211,6 @@ class Doctor(models.Model):
     @property
     def full_address(self):
         return f"{self.street} {self.city} {self.state} {self.zipcode}"
-
-
-class Clinic(models.Model):
-    class Meta:
-        db_table = "CLINIC"
-
-    id = models.BigAutoField(db_column="ID", primary_key=True)
-
-    created_date = models.DateTimeField(db_column="CREATED_DATE", auto_now_add=True)
-
-    modified_date = models.DateTimeField(db_column="MODIFIED_DATE", auto_now=True)
-
-    clinic_name = models.CharField(
-        db_column="CLINIC_NAME", max_length=300, null=False, blank=False
-    )
-
-    street = models.CharField(
-        db_column="STREET", null=False, blank=False, max_length=300
-    )
-
-    city = models.CharField(db_column="CITY", null=False, blank=False, max_length=300)
-
-    state = models.CharField(db_column="STATE", null=False, blank=False, max_length=300)
-
-    zipcode = models.CharField(
-        db_column="ZIPCODE", null=False, blank=False, max_length=7
-    )
-
-    phone = models.CharField(db_column="PHONE", null=False, blank=False, max_length=20)
-
-
-    doctor_clinic = models.ManyToManyField(
-        Doctor,
-        db_column="DOCTOR_ID",
-        related_name="mm_doctor_id",
-        blank=True,
-    )
-
-    
-    archived = models.BooleanField(db_column="ARCHIVED", default=False)
-
-    @property
-    def get_clinic_name(self):
-        return f"{self.clinic_name}"
-
-    @property
-    def full_address(self):
-        return f"{self.street} {self.city} {self.state} {self.zipcode}"
-
-    def __str__(self):
-        return f"{self.clinic_name}"
 
 
 
@@ -248,28 +259,31 @@ class Appointments(models.Model):
     archived = models.BooleanField(db_column="ARCHIVED", default=False)
 
 
-class DoctorClinics(models.Model):
-    class Meta:
-        db_table = "DOCTOR_CLINICS"
+# class DoctorClinics(models.Model):
+#     class Meta:
+#         db_table = "DOCTOR_CLINICS"
 
 
-    created_date = models.DateTimeField(
-        db_column="CREATED_DATE", auto_now_add=True
-    )
+#     created_date = models.DateTimeField(
+#         db_column="CREATED_DATE", auto_now_add=True
+#     )
     
-    modified_date = models.DateTimeField(
-        db_column="MODIFIED_DATE", auto_now=True
-    )
+#     modified_date = models.DateTimeField(
+#         db_column="MODIFIED_DATE", auto_now=True
+#     )
 
-    doctor = models.ForeignKey(
-        Doctor, db_column="Doctor", on_delete=models.CASCADE
-    )
+#     doctor = models.ForeignKey(
+#         Doctor, db_column="Doctor", 
+#         on_delete=models.CASCADE,
+#         related_name = 'doctors'
+#     )
 
-    Clinic = models.ForeignKey(
-        Clinic,
-        db_column="CLINIC",
-        on_delete=models.CASCADE,
-    )
+#     Clinic = models.ForeignKey(
+#         Clinic,
+#         db_column="CLINIC",
+#         on_delete=models.CASCADE,
+#         related_name = 'clinics'
+#     )
 
-    archived = models.BooleanField(db_column="ARCHIVED", default=False)
+#     archived = models.BooleanField(db_column="ARCHIVED", default=False)
 

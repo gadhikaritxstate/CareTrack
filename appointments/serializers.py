@@ -1,10 +1,44 @@
-from .models import Patient, Clinic, Doctor
+from .models import Patient, Clinic, Doctor, Appointments
 from rest_framework import serializers
 
 
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Patient
+        fields = "__all__"
+        extra_kwargs = {
+            "id": {
+                "read_only": False,
+                "required": False,
+            },
+            "created_date": {
+                "read_only": True,
+            },
+            "modified_date": {
+                "read_only": True,
+            }
+        }
+
+
+class ClinicGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Clinic
+        fields = "__all__"
+
+
+class ClinicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Clinic
+        exclude = (
+            "created_date",
+            "modified_date",
+        )
+
+
+class DoctorGetSerializer(serializers.ModelSerializer):
+    clinic = ClinicSerializer()
+    class Meta:
+        model = Doctor
         fields = "__all__"
         extra_kwargs = {
             "id": {
@@ -39,39 +73,40 @@ class DoctorSerializer(serializers.ModelSerializer):
 
 
 
-class ClinicGetSerializer(serializers.ModelSerializer):
-    doctor_clinic = DoctorSerializer(many=True)
+class AppointmentsGetSerializer(serializers.ModelSerializer):
+    doctor = DoctorGetSerializer()
+    clinic = ClinicGetSerializer()
     class Meta:
-        model = Clinic
+        model = Appointments
         fields = "__all__"
-    
+        extra_kwargs = {
+            "id": {
+                "read_only": False,
+                "required": False,
+            },
+            "created_date": {
+                "read_only": True,
+            },
+            "modified_date": {
+                "read_only": True,
+            }
+        }
 
 
 
-class ClinicSerializer(serializers.ModelSerializer):
-    # doctor = serializers.ReadOnlyField(source='author.name')
-    doctor = serializers.ListField(write_only=True)
-    # doctor = DoctorSerializer(many=True)
+class AppointmentsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Clinic
+        model = Appointments
         fields = "__all__"
-        # extra_kwargs = {
-        #     "id": {
-        #         "read_only": True,
-        #         "required": False,
-        #     },
-        #     "created_date": {
-        #         "read_only": True,
-        #     },
-        #     "modified_date": {
-        #         "read_only": True,
-        #     }
-        # }
-    
-    def create(self, validated_data):
-
-        doctor_data = validated_data.pop('doctor')
-        clinic = Clinic.objects.create(**validated_data)
-        clinic.doctor_clinic.set(doctor_data)
-        return clinic
-    
+        extra_kwargs = {
+            "id": {
+                "read_only": False,
+                "required": False,
+            },
+            "created_date": {
+                "read_only": True,
+            },
+            "modified_date": {
+                "read_only": True,
+            }
+        }
