@@ -1,0 +1,605 @@
+
+Patients
+--------------------
+
+[GET] https://127.0.0.1:8000/patient
+
+Response Format:
+
+    {
+        "http_status": 200,
+        "message": null,
+        "data": [
+            {
+                "id": 1,
+                "created_date": "2023-04-24T20:39:46.122499Z",
+                "modified_date": "2023-04-24T20:39:46.122523Z",
+                "first_name": "Test",
+                "middle_name": "Test_mname",
+                "last_name": "Testlname",
+                "email": "test@test.com",
+                "street": "1020 university",
+                "city": "San MArcos",
+                "state": "TX",
+                "zipcode": "78666",
+                "phone": "1000000",
+                "date_of_birth": "2022-10-10",
+                "gender": "M",
+                "archived": false
+            },
+            {
+                "id": 2,
+                "created_date": "2023-04-25T07:19:41.652938Z",
+                "modified_date": "2023-04-25T07:19:41.652988Z",
+                "first_name": "William",
+                "middle_name": "D.",
+                "last_name": "Brown",
+                "email": "william.brown@yahoo.com",
+                "street": "222 Pine Dr",
+                "city": "Seattle",
+                "state": "WA",
+                "zipcode": "98101",
+                "phone": "(206) 555-6789",
+                "date_of_birth": "1983-11-12",
+                "gender": "M",
+                "archived": false
+            },
+            {
+                "id": 3,
+                "created_date": "2023-04-25T07:20:53.379746Z",
+                "modified_date": "2023-04-25T07:20:53.379772Z",
+                "first_name": "Chloe",
+                "middle_name": null,
+                "last_name": "Scott",
+                "email": "william.brown@yahoo.com",
+                "street": "222 Pine Dr",
+                "city": "Seattle",
+                "state": "WA",
+                "zipcode": "98101",
+                "phone": "(206) 555-6789",
+                "date_of_birth": "1998-05-03",
+                "gender": "M",
+                "archived": false
+            },
+            {
+                "id": 4,
+                "created_date": "2023-04-25T07:22:59.403019Z",
+                "modified_date": "2023-04-25T07:22:59.403055Z",
+                "first_name": "Lucas",
+                "middle_name": "M.",
+                "last_name": "Lee",
+                "email": "lucas.lee@gmail.com",
+                "street": "910 Maple Ave",
+                "city": "Boston",
+                "state": "MA",
+                "zipcode": "02101",
+                "phone": "(617) 555-7890",
+                "date_of_birth": "1990-01-31",
+                "gender": "M",
+                "archived": false
+            },
+            {
+                "id": 5,
+                "created_date": "2023-04-25T07:23:50.575744Z",
+                "modified_date": "2023-04-25T07:23:50.575786Z",
+                "first_name": "Ava",
+                "middle_name": null,
+                "last_name": "Rodriguez",
+                "email": "ava.rodriguez@yahoo.com",
+                "street": "678 Pine Dr",
+                "city": "San Francisco",
+                "state": "CA",
+                "zipcode": "94101",
+                "phone": "(415) 555-6789",
+                "date_of_birth": "1996-06-15",
+                "gender": "F",
+                "archived": false
+            },
+            {
+                "id": 6,
+                "created_date": "2023-04-25T07:24:39.293652Z",
+                "modified_date": "2023-04-25T07:24:39.293692Z",
+                "first_name": "Benjamin",
+                "middle_name": "J.",
+                "last_name": "Thompson",
+                "email": "benjamin.thompson@gmail.com",
+                "street": "345 Oak St",
+                "city": "Chicago",
+                "state": "IL",
+                "zipcode": "60601",
+                "phone": "(312) 555-2345",
+                "date_of_birth": "1999-12-01",
+                "gender": "M",
+                "archived": false
+            }
+        ],
+        "success": true,
+        "code": null
+    }
+
+
+[Retrieve] https://127.0.0.1:8000/patient/{id}
+
+Response Format:
+
+    {
+        "http_status": 200,
+        "message": null,
+        "data": {
+            "id": 2,
+            "created_date": "2023-04-25T07:19:41.652938Z",
+            "modified_date": "2023-04-25T07:19:41.652988Z",
+            "first_name": "William",
+            "middle_name": "D.",
+            "last_name": "Brown",
+            "email": "william.brown@yahoo.com",
+            "street": "222 Pine Dr",
+            "city": "Seattle",
+            "state": "WA",
+            "zipcode": "98101",
+            "phone": "(206) 555-6789",
+            "date_of_birth": "1983-11-12",
+            "gender": "M",
+            "archived": false
+        },
+        "success": true,
+        "code": null
+    }
+
+
+[POST] https://127.0.0.1:8000/patient
+
+
+Request Format:
+
+    {
+            "first_name": "William",
+            "middle_name": null,
+            "last_name": "Debron",
+            "email": "william.debron@yahoo.com",
+            "street": "22 Pine Dr",
+            "city": "Seattle",
+            "state": "WA",
+            "zipcode": "98101",
+            "phone": "(202) 525-6789",
+            "date_of_birth": "1988-11-12",
+            "gender": "M",
+            "archived": false
+    }
+
+Response Format:
+
+    {
+        "http_status": 201,
+        "message": "Successfully Created",
+        "data": {
+            "id": 7,
+            "created_date": "2023-05-01T17:27:05.490106Z",
+            "modified_date": "2023-05-01T17:27:05.490132Z",
+            "first_name": "William",
+            "middle_name": null,
+            "last_name": "Debron",
+            "email": "william.debron@yahoo.com",
+            "street": "22 Pine Dr",
+            "city": "Seattle",
+            "state": "WA",
+            "zipcode": "98101",
+            "phone": "(202) 525-6789",
+            "date_of_birth": "1988-11-12",
+            "gender": "M",
+            "archived": false
+        },
+        "success": true,
+        "code": null
+    }
+
+
+[PUT] https://127.0.0.1:8000/patient/{id}
+
+Request format:
+
+    {
+            "first_name": "William",
+            "middle_name": null,
+            "last_name": "Debron",
+            "email": "william.debron@gmail.com",
+            "street": "22 Pine Dr",
+            "city": "Seattle",
+            "state": "WA",
+            "zipcode": "98101",
+            "phone": "(202) 525-6789",
+            "date_of_birth": "1988-11-12",
+            "gender": "M",
+            "archived": false
+    }
+
+Response Format:
+
+    {
+        "http_status": 206,
+        "message": "Successfully Updated",
+        "data": {
+            "id": 7,
+            "created_date": "2023-05-01T17:27:05.490106Z",
+            "modified_date": "2023-05-01T17:28:28.002999Z",
+            "first_name": "William",
+            "middle_name": null,
+            "last_name": "Debron",
+            "email": "william.debron@gmail.com",
+            "street": "22 Pine Dr",
+            "city": "Seattle",
+            "state": "WA",
+            "zipcode": "98101",
+            "phone": "(202) 525-6789",
+            "date_of_birth": "1988-11-12",
+            "gender": "M",
+            "archived": false
+        },
+        "success": true,
+        "code": null
+    }
+
+
+[DELETE] https://127.0.0.1:8000/patient/{id}/
+
+Response Format:
+
+    {
+        "http_status": 200,
+        "message": "Successfully Deleted",
+        "data": null,
+        "success": true,
+        "code": null
+    }
+
+
+
+
+Doctors
+--------------------
+
+[GET] https://127.0.0.1:8000/doctor
+
+Response Format:
+
+    {
+        "http_status": 200,
+        "message": null,
+        "data": [
+            {
+                "id": 9,
+                "clinic": {
+                    "id": 1,
+                    "clinic_name": "Healthy Life",
+                    "street": "123 Main St",
+                    "city": "Seattle",
+                    "state": "WA",
+                    "zipcode": "98101",
+                    "phone": "(206) 555-1234",
+                    "archived": false
+                },
+                "created_date": "2023-04-27T05:31:42.500434Z",
+                "modified_date": "2023-04-27T05:31:42.500484Z",
+                "first_name": "Sarah",
+                "middle_name": null,
+                "last_name": "Johnson",
+                "email": "sarah.johnson22@yahoo.com",
+                "street": "456 Oak Ave",
+                "city": "Los Angeles",
+                "state": "CA",
+                "zipcode": "90001",
+                "phone": "(323) 555-5678",
+                "specialization": "DERMATOLOGIST",
+                "archived": false
+            },
+            {
+                "id": 1,
+                "clinic": {
+                    "id": 1,
+                    "clinic_name": "Healthy Life",
+                    "street": "123 Main St",
+                    "city": "Seattle",
+                    "state": "WA",
+                    "zipcode": "98101",
+                    "phone": "(206) 555-1234",
+                    "archived": false
+                },
+                "created_date": "2023-04-25T06:47:07.983606Z",
+                "modified_date": "2023-04-25T06:47:07.983659Z",
+                "first_name": "Gagan",
+                "middle_name": null,
+                "last_name": "Thapa",
+                "email": "gagan.thapa@medicity.com",
+                "street": "601 University Drive",
+                "city": "San Marcos",
+                "state": "TX",
+                "zipcode": "78666",
+                "phone": "100022000",
+                "specialization": "PHISIOTHERAPY",
+                "archived": false
+            },
+            {
+                "id": 2,
+                "clinic": {
+                    "id": 6,
+                    "clinic_name": "Rainbow Medical",
+                    "street": "345 Oak St",
+                    "city": "Chicago",
+                    "state": "IL",
+                    "zipcode": "60601",
+                    "phone": "(312) 555-2345",
+                    "archived": false
+                },
+                "created_date": "2023-04-25T06:53:27.198771Z",
+                "modified_date": "2023-04-25T06:53:27.198823Z",
+                "first_name": "John",
+                "middle_name": null,
+                "last_name": "Smith",
+                "email": "john.smith@gmail.com",
+                "street": "123 Main St",
+                "city": "Chicago",
+                "state": "IL",
+                "zipcode": "60601",
+                "phone": "(312) 555-1234",
+                "specialization": "UROLOGIST",
+                "archived": false
+            },
+            {
+                "id": 3,
+                "clinic": {
+                    "id": 6,
+                    "clinic_name": "Rainbow Medical",
+                    "street": "345 Oak St",
+                    "city": "Chicago",
+                    "state": "IL",
+                    "zipcode": "60601",
+                    "phone": "(312) 555-2345",
+                    "archived": false
+                },
+                "created_date": "2023-04-25T06:54:24.160716Z",
+                "modified_date": "2023-04-25T06:54:24.160755Z",
+                "first_name": "Sarah",
+                "middle_name": null,
+                "last_name": "Johnson",
+                "email": "sarah.johnson@yahoo.com",
+                "street": "456 Oak Ave",
+                "city": "Los Angeles",
+                "state": "CA",
+                "zipcode": "90001",
+                "phone": "(323) 555-5678",
+                "specialization": "DERMATOLOGIST",
+                "archived": false
+            },
+            {
+                "id": 4,
+                "clinic": {
+                    "id": 3,
+                    "clinic_name": "Vitality Clinic",
+                    "street": "789 Maple Dr",
+                    "city": "New York",
+                    "state": "NY",
+                    "zipcode": "10001",
+                    "phone": "(212) 555-9012",
+                    "archived": false
+                },
+                "created_date": "2023-04-25T06:55:22.962209Z",
+                "modified_date": "2023-04-25T06:55:22.962271Z",
+                "first_name": "Michael",
+                "middle_name": "J.",
+                "last_name": "Rodriguez",
+                "email": "michael.rodriguez@hotmail.com",
+                "street": "789 Maple Dr",
+                "city": "New York",
+                "state": "NY",
+                "zipcode": "10001",
+                "phone": "(212) 555-9012",
+                "specialization": "PSYCHIATRIST",
+                "archived": false
+            },
+            {
+                "id": 5,
+                "clinic": {
+                    "id": 4,
+                    "clinic_name": "Wellness Center",
+                    "street": "Wellness Center",
+                    "city": "Houston",
+                    "state": "TX",
+                    "zipcode": "77001",
+                    "phone": "(713) 555-3456",
+                    "archived": false
+                },
+                "created_date": "2023-04-25T06:56:06.707631Z",
+                "modified_date": "2023-04-25T06:56:06.707659Z",
+                "first_name": "Emily",
+                "middle_name": "K.",
+                "last_name": "Lee",
+                "email": "emily.lee@gmail.com",
+                "street": "101 Pine St",
+                "city": "Houston",
+                "state": "TX",
+                "zipcode": "77001",
+                "phone": "(713) 555-3456",
+                "specialization": "CARDIOLOGIST",
+                "archived": false
+            },
+            {
+                "id": 6,
+                "clinic": {
+                    "id": 2,
+                    "clinic_name": "Family Medical",
+                    "street": "456 Oak Ave",
+                    "city": "Los Angeles",
+                    "state": "CA",
+                    "zipcode": "90001",
+                    "phone": "(323) 555-5678",
+                    "archived": false
+                },
+                "created_date": "2023-04-25T06:56:55.533964Z",
+                "modified_date": "2023-04-25T06:56:55.534012Z",
+                "first_name": "David",
+                "middle_name": "M.",
+                "last_name": "Brown",
+                "email": "david.brown@outlook.com",
+                "street": "222 Elm St",
+                "city": "Miami",
+                "state": "FL",
+                "zipcode": "33101",
+                "phone": "(305) 555-7890",
+                "specialization": "RADIOLOGIST",
+                "archived": false
+            }
+        ],
+        "success": true,
+        "code": null
+    }
+
+[Retrieve] https://127.0.0.1:8000/doctor/{id}
+
+Response Format:
+
+    {
+        "http_status": 200,
+        "message": null,
+        "data": {
+            "id": 8,
+            "clinic": {
+                "id": 2,
+                "clinic_name": "Family Medical",
+                "street": "456 Oak Ave",
+                "city": "Los Angeles",
+                "state": "CA",
+                "zipcode": "90001",
+                "phone": "(323) 555-5678",
+                "archived": false
+            },
+            "created_date": "2023-04-25T07:03:46.501547Z",
+            "modified_date": "2023-04-25T07:03:46.501614Z",
+            "first_name": "Daniel",
+            "middle_name": null,
+            "last_name": "Kim",
+            "email": "daniel.kim@gmail.com",
+            "street": "444 Pine Ave",
+            "city": "Boston",
+            "state": "MA",
+            "zipcode": "02101",
+            "phone": "(617) 555-6789",
+            "specialization": "GYNECOLOGIST",
+            "archived": false
+        },
+        "success": true,
+        "code": null
+    }
+
+
+[POST] https://127.0.0.1:8000/doctor/
+
+
+Request Format:
+    {
+        "clinic": 4,
+        "first_name": "Nelson",
+        "middle_name": null,
+        "last_name": "Kim",
+        "email": "nelson.kim@gmail.com",
+        "street": "444 Pine Ave",
+        "city": "Boston",
+        "state": "MA",
+        "zipcode": "02101",
+        "phone": "(617) 525-6989",
+        "specialization": "GYNECOLOGIST",
+        "archived": false
+    }
+
+Response Format:
+
+    {
+        "http_status": 201,
+        "message": "Successfully Created",
+        "data": {
+            "id": 10,
+            "created_date": "2023-05-01T17:48:27.074352Z",
+            "modified_date": "2023-05-01T17:48:27.074394Z",
+            "first_name": "Nelson",
+            "middle_name": null,
+            "last_name": "Kim",
+            "email": "nelson.kim@gmail.com",
+            "street": "444 Pine Ave",
+            "city": "Boston",
+            "state": "MA",
+            "zipcode": "02101",
+            "phone": "(617) 525-6989",
+            "specialization": "GYNECOLOGIST",
+            "archived": false,
+            "clinic": 4
+        },
+        "success": true,
+        "code": null
+    }
+
+
+[PUT] https://127.0.0.1:8000/doctor/{id}
+
+Request format:
+
+    {
+        "clinic": 5,
+        "first_name": "Nelson",
+        "middle_name": null,
+        "last_name": "Kim",
+        "email": "nelson.kim@gmail.com",
+        "street": "444 Pine Ave",
+        "city": "Boston",
+        "state": "MA",
+        "zipcode": "02101",
+        "phone": "(617) 525-6989",
+        "specialization": "GYNECOLOGIST",
+        "archived": false
+    }
+
+Response Format:
+
+    {
+        "http_status": 206,
+        "message": "Successfully Updated",
+        "data": {
+            "id": 10,
+            "created_date": "2023-05-01T17:48:27.074352Z",
+            "modified_date": "2023-05-01T17:49:05.178330Z",
+            "first_name": "Nelson",
+            "middle_name": null,
+            "last_name": "Kim",
+            "email": "nelson.kim@gmail.com",
+            "street": "444 Pine Ave",
+            "city": "Boston",
+            "state": "MA",
+            "zipcode": "02101",
+            "phone": "(617) 525-6989",
+            "specialization": "GYNECOLOGIST",
+            "archived": false,
+            "clinic": 5
+        },
+        "success": true,
+        "code": null
+    }
+
+
+[DELETE] https://127.0.0.1:8000/doctor/{id}/
+
+Response Format:
+
+    {
+        "http_status": 200,
+        "message": "Successfully Deleted",
+        "data": null,
+        "success": true,
+        "code": null
+    }
+
+
+
+
+
+
+
+
+
