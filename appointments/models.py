@@ -213,8 +213,6 @@ class Doctor(models.Model):
         return f"{self.street} {self.city} {self.state} {self.zipcode}"
 
 
-
-
 class Appointments(models.Model):
     class Meta:
         db_table = "APPOINTMENTS"
@@ -256,6 +254,9 @@ class Appointments(models.Model):
         db_column="APPOINTMENT_DATETIME", blank=True, null=True, default=None
     )
 
+    patient_notes = models.TextField(
+        db_column="PATIENT_NOTES", blank=True, null=True, max_length=600
+    )
     archived = models.BooleanField(db_column="ARCHIVED", default=False)
 
 

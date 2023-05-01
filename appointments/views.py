@@ -280,7 +280,7 @@ class AppointmentsView(viewsets.ModelViewSet):
                 message="No Matching Record found",
             )
 
-        serializer = ClinicSerializer(result, context={"request": request})
+        serializer = AppointmentsGetSerializer(result, context={"request": request})
         return CareTrackResponse(data=serializer.data).build_response()
 
     def create(self, request):
