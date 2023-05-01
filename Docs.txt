@@ -596,10 +596,515 @@ Response Format:
     }
 
 
+Clinic
+-------------
+
+[GET] https://127.0.0.1:8000/clinic
+
+Response Format:
+
+    {
+        "http_status": 200,
+        "message": null,
+        "data": [
+            {
+                "id": 1,
+                "created_date": "2023-04-25T07:37:38.869632Z",
+                "modified_date": "2023-04-25T07:37:38.869683Z",
+                "clinic_name": "Healthy Life",
+                "street": "123 Main St",
+                "city": "Seattle",
+                "state": "WA",
+                "zipcode": "98101",
+                "phone": "(206) 555-1234",
+                "archived": false
+            },
+            {
+                "id": 2,
+                "created_date": "2023-04-25T07:38:10.412478Z",
+                "modified_date": "2023-04-25T07:38:10.412530Z",
+                "clinic_name": "Family Medical",
+                "street": "456 Oak Ave",
+                "city": "Los Angeles",
+                "state": "CA",
+                "zipcode": "90001",
+                "phone": "(323) 555-5678",
+                "archived": false
+            },
+            {
+                "id": 3,
+                "created_date": "2023-04-25T07:42:45.851365Z",
+                "modified_date": "2023-04-25T07:42:45.851411Z",
+                "clinic_name": "Vitality Clinic",
+                "street": "789 Maple Dr",
+                "city": "New York",
+                "state": "NY",
+                "zipcode": "10001",
+                "phone": "(212) 555-9012",
+                "archived": false
+            },
+            {
+                "id": 4,
+                "created_date": "2023-04-25T07:43:12.468012Z",
+                "modified_date": "2023-04-25T07:43:12.468035Z",
+                "clinic_name": "Wellness Center",
+                "street": "Wellness Center",
+                "city": "Houston",
+                "state": "TX",
+                "zipcode": "77001",
+                "phone": "(713) 555-3456",
+                "archived": false
+            },
+            {
+                "id": 5,
+                "created_date": "2023-04-25T07:43:42.591926Z",
+                "modified_date": "2023-04-25T07:43:42.591959Z",
+                "clinic_name": "Hope Clinic",
+                "street": "222 Elm St",
+                "city": "Miami",
+                "state": "FL",
+                "zipcode": "33101",
+                "phone": "(305) 555-7890",
+                "archived": false
+            },
+            {
+                "id": 6,
+                "created_date": "2023-04-25T07:44:06.700859Z",
+                "modified_date": "2023-04-25T07:44:06.700884Z",
+                "clinic_name": "Rainbow Medical",
+                "street": "345 Oak St",
+                "city": "Chicago",
+                "state": "IL",
+                "zipcode": "60601",
+                "phone": "(312) 555-2345",
+                "archived": false
+            },
+            {
+                "id": 7,
+                "created_date": "2023-04-25T07:44:37.548100Z",
+                "modified_date": "2023-04-25T07:44:37.548148Z",
+                "clinic_name": "Sunshine Health",
+                "street": "678 Pine Dr",
+                "city": "San Francisco",
+                "state": "CA",
+                "zipcode": "94101",
+                "phone": "(415) 555-6789",
+                "archived": false
+            },
+            {
+                "id": 8,
+                "created_date": "2023-04-25T07:45:03.453026Z",
+                "modified_date": "2023-04-25T07:45:03.453059Z",
+                "clinic_name": "Harmony Medical",
+                "street": "910 Maple Ave",
+                "city": "Boston",
+                "state": "MA",
+                "zipcode": "02101",
+                "phone": "(617) 555-7890",
+                "archived": false
+            }
+        ],
+        "success": true,
+        "code": null
+    }
+
+[Retrieve] https://127.0.0.1:8000/clinic/{id}
+
+Response Format:
+
+    {
+        "http_status": 200,
+        "message": null,
+        "data": {
+            "id": 5,
+            "clinic_name": "Hope Clinic",
+            "street": "222 Elm St",
+            "city": "Miami",
+            "state": "FL",
+            "zipcode": "33101",
+            "phone": "(305) 555-7890",
+            "archived": false
+        },
+        "success": true,
+        "code": null
+    }
+
+[POST] https://127.0.0.1:8000/clinic/
+
+Request Format:
+
+    {
+        "clinic_name": "Hedamba Clinic",
+        "street": "222 Elm St",
+        "city": "Miami",
+        "state": "FL",
+        "zipcode": "33102",
+        "phone": "(305) 555-7230",
+        "archived": false
+    }
+
+Response Format:
+
+    {
+        "http_status": 201,
+        "message": "Successfully Created",
+        "data": {
+            "id": 51,
+            "clinic_name": "Hedamba Clinic",
+            "street": "222 Elm St",
+            "city": "Miami",
+            "state": "FL",
+            "zipcode": "33102",
+            "phone": "(305) 555-7230",
+            "archived": false
+        },
+        "success": true,
+        "code": null
+    }
+
+
+[PUT] https://127.0.0.1:8000/clinic/{id}
+
+Request format:
+
+    {
+        "clinic_name": "Hedambaa Clinic",
+        "street": "222 Elm St",
+        "city": "Miami",
+        "state": "FL",
+        "zipcode": "33102",
+        "phone": "(305) 555-7230",
+        "archived": false
+    }
+
+Response Format:
+
+    {
+        "http_status": 206,
+        "message": "Successfully Updated",
+        "data": {
+            "id": 51,
+            "clinic_name": "Hedambaa Clinic",
+            "street": "222 Elm St",
+            "city": "Miami",
+            "state": "FL",
+            "zipcode": "33102",
+            "phone": "(305) 555-7230",
+            "archived": false
+        },
+        "success": true,
+        "code": null
+    }
+
+
+[DELETE] https://127.0.0.1:8000/clinic/{id}/
+
+Response Format:
+
+    {
+        "http_status": 200,
+        "message": "Successfully Deleted",
+        "data": null,
+        "success": true,
+        "code": null
+    }
 
 
 
 
+Appointment 
+---------------
+
+[GET] https://127.0.0.1:8000/appointment
+
+Response Format:
+
+  {
+    "http_status": 200,
+    "message": null,
+    "data": [
+        {
+            "id": 1,
+            "doctor": {
+                "id": 1,
+                "clinic": {
+                    "id": 1,
+                    "clinic_name": "Healthy Life",
+                    "street": "123 Main St",
+                    "city": "Seattle",
+                    "state": "WA",
+                    "zipcode": "98101",
+                    "phone": "(206) 555-1234",
+                    "archived": false
+                },
+                "created_date": "2023-04-25T06:47:07.983606Z",
+                "modified_date": "2023-04-25T06:47:07.983659Z",
+                "first_name": "Gagan",
+                "middle_name": null,
+                "last_name": "Thapa",
+                "email": "gagan.thapa@medicity.com",
+                "street": "601 University Drive",
+                "city": "San Marcos",
+                "state": "TX",
+                "zipcode": "78666",
+                "phone": "100022000",
+                "specialization": "PHISIOTHERAPY",
+                "archived": false
+            },
+            "clinic": {
+                "id": 31,
+                "created_date": "2023-04-25T21:28:01.365881Z",
+                "modified_date": "2023-04-25T21:28:01.366161Z",
+                "clinic_name": "Healing Center2",
+                "street": "456 Oak Ave",
+                "city": "San Franisco",
+                "state": "CA",
+                "zipcode": "90001",
+                "phone": "(323) 666-5678",
+                "archived": false
+            },
+            "created_date": "2023-04-25T21:28:03.676100Z",
+            "modified_date": "2023-04-25T21:28:03.676132Z",
+            "appointment_datetime": null,
+            "patient_notes": null,
+            "archived": false,
+            "patient": 1
+        },
+        {
+            "id": 2,
+            "doctor": {
+                "id": 2,
+                "clinic": {
+                    "id": 6,
+                    "clinic_name": "Rainbow Medical",
+                    "street": "345 Oak St",
+                    "city": "Chicago",
+                    "state": "IL",
+                    "zipcode": "60601",
+                    "phone": "(312) 555-2345",
+                    "archived": false
+                },
+                "created_date": "2023-04-25T06:53:27.198771Z",
+                "modified_date": "2023-04-25T06:53:27.198823Z",
+                "first_name": "John",
+                "middle_name": null,
+                "last_name": "Smith",
+                "email": "john.smith@gmail.com",
+                "street": "123 Main St",
+                "city": "Chicago",
+                "state": "IL",
+                "zipcode": "60601",
+                "phone": "(312) 555-1234",
+                "specialization": "UROLOGIST",
+                "archived": false
+            },
+            "clinic": {
+                "id": 1,
+                "created_date": "2023-04-25T07:37:38.869632Z",
+                "modified_date": "2023-04-25T07:37:38.869683Z",
+                "clinic_name": "Healthy Life",
+                "street": "123 Main St",
+                "city": "Seattle",
+                "state": "WA",
+                "zipcode": "98101",
+                "phone": "(206) 555-1234",
+                "archived": false
+            },
+            "created_date": "2023-04-27T19:32:06.897422Z",
+            "modified_date": "2023-04-27T19:37:18.989806Z",
+            "appointment_datetime": "2023-03-26T00:00:00Z",
+            "patient_notes": null,
+            "archived": true,
+            "patient": 3
+        },
+        {
+            "id": 3,
+            "doctor": {
+                "id": 1,
+                "clinic": {
+                    "id": 1,
+                    "clinic_name": "Healthy Life",
+                    "street": "123 Main St",
+                    "city": "Seattle",
+                    "state": "WA",
+                    "zipcode": "98101",
+                    "phone": "(206) 555-1234",
+                    "archived": false
+                },
+                "created_date": "2023-04-25T06:47:07.983606Z",
+                "modified_date": "2023-04-25T06:47:07.983659Z",
+                "first_name": "Gagan",
+                "middle_name": null,
+                "last_name": "Thapa",
+                "email": "gagan.thapa@medicity.com",
+                "street": "601 University Drive",
+                "city": "San Marcos",
+                "state": "TX",
+                "zipcode": "78666",
+                "phone": "100022000",
+                "specialization": "PHISIOTHERAPY",
+                "archived": false
+            },
+            "clinic": {
+                "id": 3,
+                "created_date": "2023-04-25T07:42:45.851365Z",
+                "modified_date": "2023-04-25T07:42:45.851411Z",
+                "clinic_name": "Vitality Clinic",
+                "street": "789 Maple Dr",
+                "city": "New York",
+                "state": "NY",
+                "zipcode": "10001",
+                "phone": "(212) 555-9012",
+                "archived": false
+            },
+            "created_date": "2023-04-30T19:24:09.560752Z",
+            "modified_date": "2023-04-30T19:24:09.560802Z",
+            "appointment_datetime": "2023-04-12T20:23:29Z",
+            "patient_notes": "I have trouble breathing",
+            "archived": false,
+            "patient": 2
+        }
+    ],
+    "success": true,
+    "code": null
+}
+
+[Retrieve] https://127.0.0.1:8000/appointment/{id}
+
+Response Format:
+
+    {
+        "http_status": 200,
+        "message": null,
+        "data": {
+            "id": 1,
+            "doctor": {
+                "id": 1,
+                "clinic": {
+                    "id": 1,
+                    "clinic_name": "Healthy Life",
+                    "street": "123 Main St",
+                    "city": "Seattle",
+                    "state": "WA",
+                    "zipcode": "98101",
+                    "phone": "(206) 555-1234",
+                    "archived": false
+                },
+                "created_date": "2023-04-25T06:47:07.983606Z",
+                "modified_date": "2023-04-25T06:47:07.983659Z",
+                "first_name": "Gagan",
+                "middle_name": null,
+                "last_name": "Thapa",
+                "email": "gagan.thapa@medicity.com",
+                "street": "601 University Drive",
+                "city": "San Marcos",
+                "state": "TX",
+                "zipcode": "78666",
+                "phone": "100022000",
+                "specialization": "PHISIOTHERAPY",
+                "archived": false
+            },
+            "clinic": {
+                "id": 31,
+                "created_date": "2023-04-25T21:28:01.365881Z",
+                "modified_date": "2023-04-25T21:28:01.366161Z",
+                "clinic_name": "Healing Center2",
+                "street": "456 Oak Ave",
+                "city": "San Franisco",
+                "state": "CA",
+                "zipcode": "90001",
+                "phone": "(323) 666-5678",
+                "archived": false
+            },
+            "created_date": "2023-04-25T21:28:03.676100Z",
+            "modified_date": "2023-04-25T21:28:03.676132Z",
+            "appointment_datetime": null,
+            "patient_notes": null,
+            "archived": false,
+            "patient": 1
+        },
+        "success": true,
+        "code": null
+    }
 
 
+[POST] https://127.0.0.1:8000/appointment/
+
+Request Format:
+
+{
+    "doctor": 6,
+    "clinic": 8,
+    "appointment_datetime": "2023-04-13T19:23:29Z",
+    "archived": false,
+    "patient": 6
+}
+   
+
+Response Format:
+
+{
+    "http_status": 201,
+    "message": "Successfully Created",
+    "data": {
+        "id": 4,
+        "created_date": "2023-05-01T19:24:03.101147Z",
+        "modified_date": "2023-05-01T19:24:03.101197Z",
+        "appointment_datetime": "2023-04-13T19:23:29Z",
+        "patient_notes": null,
+        "archived": false,
+        "patient": 6,
+        "clinic": 8,
+        "doctor": 6
+    },
+    "success": true,
+    "code": null
+}
+
+
+[PUT] https://127.0.0.1:8000/appointment/{id}
+
+Request format:
+    {
+        "doctor": 6,
+        "clinic": 8,
+        "appointment_datetime": "2023-04-13T19:23:29Z",
+        "archived": false,
+        "patient": 6
+    }
+
+
+Response Format:
+
+    {
+        "http_status": 206,
+        "message": "Successfully Updated",
+        "data": {
+            "id": 3,
+            "created_date": "2023-04-30T19:24:09.560752Z",
+            "modified_date": "2023-05-01T19:30:23.695337Z",
+            "appointment_datetime": "2023-04-13T19:23:29Z",
+            "patient_notes": "I have trouble breathing",
+            "archived": false,
+            "patient": 6,
+            "clinic": 8,
+            "doctor": 6
+        },
+        "success": true,
+        "code": null
+    }
+   
+
+
+[DELETE] https://127.0.0.1:8000/appointment/{id}/
+
+Response Format:
+
+    {
+        "http_status": 200,
+        "message": "Successfully Deleted",
+        "data": null,
+        "success": true,
+        "code": null
+    }
 
