@@ -5,7 +5,7 @@ This is a Clincal database implemented using Django web application that uses a 
 Requirements
 To run the application locally, you will need to have the following installed on your system:
 
--Python 3
--Django
--PostgreSQL
+- Python 3
+- Django
+- PostgreSQL
 To deploy the application to Heroku, you will need to create a Heroku account and have the Heroku CLI installed.
